@@ -3,9 +3,9 @@
 const page404 = "404 NOT FOUND";
 const page500 = "500 INTERNAL SERVER ERROR";
 
-Deno.serve(async (request) => {
+Deno.serve({port: 51660, hostname: "localhost"},async (request) => {
 	console.log(request.url + "||" + request.headers.get("user-agent"));
-	const url = pageLookup(stripUrl(request.url));
+	const url = stripUrl(request.url);
 	let resource = null;
 	let status = 500;
 	let contentType = "text/plain";
@@ -35,15 +35,6 @@ const stripUrl = (url) => {
 	}
 	return endUrl;
 }
-
-const pageLookup = (url) => {
-	if (url.endsWith("/")) {
-		return "site/" + url + "index.html";
-	} else {
-		return "site" + url;
-	}
-}
-
 const mimeLookup = (url) => { //remember to update this anytime theres a new file type, shouldnt be but yeah, and yes i know this is very inconvenient and probably not the best way to do it thank you for pointing that out random source code reader
 	if (url.endsWith(".html")) {return "text/html"}
 	else if (url.endsWith(".css")) {return "text/css"}
