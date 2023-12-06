@@ -33,6 +33,8 @@ const stripUrl = (url) => {
 	for (let i=3; i < splitUrl.length; i++) {
 		endUrl += "/" + splitUrl[i];
 	}
+	endUrl = endUrl.substring(1)
+	console.log(endUrl);
 	return endUrl;
 }
 const mimeLookup = (url) => { //remember to update this anytime theres a new file type, shouldnt be but yeah, and yes i know this is very inconvenient and probably not the best way to do it thank you for pointing that out random source code reader
